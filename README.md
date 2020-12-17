@@ -1,5 +1,4 @@
 # 249 Final Project Documentation
-by Taylor Yang, Sung-Yin Yang
 
 Our goal is to build a Lane detection related application. To fulfill this goal we read several papers and try on different models. In this project, we use both traditional approaches as well as deep-learning approaches (lane segmentation) to design our application. 
 
@@ -108,8 +107,11 @@ Since we only have a few hundred images, to train a deep network, we need a lot 
 
 ##### Zoom: Crop out a smaller image from the center
 ![2](https://lh4.googleusercontent.com/edio_vlAJvk2ejiaKDdUuH7Qh4cif8dTbE34w4emKW9869IMeMPUp_2Z2kmh7dqx3Gq56NOTJLUiKERYBGNNcuLF4jtmf67kCLY3v-uZLjR89CQm6KtZw8uKx4fMfY3s1xGV9ND_)
+</br>
 ##### Pan: crop out a smaller image from the left or right side
+</br>
 ![2](https://lh5.googleusercontent.com/pl8da1uiMwC37WL6XDVguLx6xbxwMyS-xPGdH5u5KUXPwFxTd0P3PnVxT4HJUhUc6Gt2BpmjcoZwE2Vm-y7XQhcIKrMSPAksUiijEjspHGMQ8pLueUKw1IJWmemvYAhlgfDQswnJ)
+
 ##### adjust the brightness of the image
 ![2](https://lh5.googleusercontent.com/pl8da1uiMwC37WL6XDVguLx6xbxwMyS-xPGdH5u5KUXPwFxTd0P3PnVxT4HJUhUc6Gt2BpmjcoZwE2Vm-y7XQhcIKrMSPAksUiijEjspHGMQ8pLueUKw1IJWmemvYAhlgfDQswnJ)
 ##### flip the image horizontally, i.e do a left to right flip and change the steering angle correspondingly
@@ -117,16 +119,19 @@ Since we only have a few hundred images, to train a deep network, we need a lot 
 
 #### 3. Image Process
 
-	The Nvidia model accepts input image in 200* 66-pixel resolution. Thus, we need to change our image into a suitable color space and size. First, we would crop out the top haft of the image because it is not relevant to the steering angle. Secondly, we would change the image to YUV color space.
+The Nvidia model accepts input image in 200* 66-pixel resolution. Thus, we need to change our image into a suitable color space and size. First, we would crop out the top haft of the image because it is not relevant to the steering angle. Secondly, we would change the image to YUV color space.
 ![2](https://lh4.googleusercontent.com/thzymaXsFSbyweK5eUIA7m1cdStv2Kb0_vZsOzPTAPNNBP1Mu6VyrtvLgd0ANnHBvoI3P5X7ZfYLId5b1K5tSyduDMrNZ48MvWR9w-AndJsqz0k64uxM-nPkDtGsibcQ860QxPpJ)
 
 #### 4. Training
+
 We print out the parameter list. It shows that it has 250,000 parameters.
 ![2](https://lh6.googleusercontent.com/oYhPRSGuQ7CRLcz1Iroq_gEauAf17iIsLQDgHncc7ITtWMgw1L2qrPqCBJQd0R_t03OdQ-U_4iTHSAXNB2dbW8tEQ5X0shyMYl0Dgw_N7rCJuT-BAzTK9GC7RlrkiWTIqQ-Tvtuq)
 
 ### Evaluation
 ![2](https://lh5.googleusercontent.com/5eP-uG2E4RzjBoI5WfRKDFOSOGSxygipHDSL_JrjsRu2rqy2tUv8n5pb-0WE04poBTjIwy6MSzD23yr0G1VgnnFXRFpK_6ldbd080gEpURdX_pEePkuGsaNix0Z2Xg2Y03O5NTfH)
+
 It is good to see that training loss and validation loss declined rapidly together, and both of them stay low after epoch 6. It seems that there is no overfitting issue because validation loss stayed low with training loss.
 
-![2](https://lh5.googleusercontent.com/5eP-uG2E4RzjBoI5WfRKDFOSOGSxygipHDSL_JrjsRu2rqy2tUv8n5pb-0WE04poBTjIwy6MSzD23yr0G1VgnnFXRFpK_6ldbd080gEpURdX_pEePkuGsaNix0Z2Xg2Y03O5NTfH)
+![2](https://lh5.googleusercontent.com/jZyStIa1HjWx3XxFOZvTbxy8vKsRrcdoxf8A9ZMiDTC4WPz7BvKn85XfPa4JUQLB9jS7GOdQyT5w2ooTvCgmCBZAHIypdRxZjb4h1WCO)
+
 Another metric that seems to perform well is the R^2 metric. As we can see in our model, we have an R^2 of 93% even with 800 images, which is primarily because we used image augmentation.
